@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+    <title>OptiCrop Prediction</title>
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f2f2f2;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.container{
+    width:98%;
+    height:96vh;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* LEFT SIDE */
+.left-panel{
+    width:40%;
+    background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url('/static/crop-bg.jpeg');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.overlay{
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+.overlay img{
+    width:180px;
+    margin-bottom:25px;
+}
+
+.overlay h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.overlay h2{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.overlay p{
+    font-size:20px;
+    font-style:italic;
+    margin-bottom:15px;
+}
+
+.overlay span{
+    font-size:15px;
+    line-height:1.8;
+    color:#f0f0f0;
+}
+
+/* RIGHT SIDE */
+.right-panel{
+    width:60%;
+    padding:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.tag{
+    display:inline-block;
+    background:#edf8e8;
+    color:#68b92e;
+    padding:10px 20px;
+    border-radius:30px;
+    font-size:13px;
+    margin-bottom:20px;
+    width:fit-content;
+}
+
+.right-panel h1{
+    font-size:52px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.right-panel h1 span{
+    color:#68b92e;
+}
+
+.desc{
+    color:#666;
+    margin-bottom:30px;
+}
+
+.row{
+    display:flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+input{
+    flex:1;
+    padding:18px;
+    border:none;
+    background:#f4f4f4;
+    border-radius:15px;
+    font-size:16px;
+}
+
+.full{
+    width:100%;
+    margin-bottom:20px;
+}
+
+button{
+    width:260px;
+    padding:18px;
+    background:#68b92e;
+    color:white;
+    border:none;
+    border-radius:15px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* TABLET */
+@media (max-width: 1024px){
+
+    .container{
+        width:95%;
+        height:auto;
+        min-height:90vh;
+    }
+
+    .left-panel{
+        width:45%;
+    }
+
+    .right-panel{
+        width:55%;
+        padding:30px;
+    }
+
+    .overlay h1{
+        font-size:40px;
+    }
+
+    .overlay h2{
+        font-size:24px;
+    }
+
+    .right-panel h1{
+        font-size:40px;
+    }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px){
+
+    body{
+        height:auto;
+        overflow:auto;
+        padding:15px 0;
+    }
+
+    .container{
+        width:95%;
+        height:auto;
+        flex-direction:column;
+        border-radius:20px;
+    }
+
+    .left-panel{
+        width:100%;
+        min-height:280px;
+    }
+
+    .overlay{
+        padding:25px;
+    }
+
+    .overlay img{
+        width:120px;
+        margin-bottom:15px;
+    }
+
+    .overlay h1{
+        font-size:32px;
+    }
+
+    .overlay h2{
+        font-size:22px;
+    }
+
+    .overlay p{
+        font-size:16px;
+    }
+
+    .overlay span{
+        font-size:13px;
+    }
+
+    .right-panel{
+        width:100%;
+        padding:25px 20px;
+    }
+
+    .tag{
+        font-size:11px;
+        padding:8px 14px;
+    }
+
+    .right-panel h1{
+        font-size:32px;
+    }
+
+    .desc{
+        font-size:14px;
+        margin-bottom:20px;
+    }
+
+    .row{
+        flex-direction:column;
+        gap:15px;
+        margin-bottom:15px;
+    }
+
+    input{
+        width:100%;
+        padding:15px;
+        font-size:14px;
+    }
+
+    button{
+        width:100%;
+        padding:15px;
+        font-size:16px;
+    }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px){
+
+    .left-panel{
+        min-height:220px;
+    }
+
+    .overlay h1{
+        font-size:28px;
+    }
+
+    .overlay h2{
+        font-size:18px;
+    }
+
+    .overlay p{
+        font-size:14px;
+    }
+
+    .right-panel h1{
+        font-size:26px;
+    }
+}
+    </style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="left-panel">
+
+    <div class="overlay">
+        <div class="quote-box">
+            <div class="small-tag">AI POWERED FARMING</div>
+
+            <h1>OptiCrop</h1>
+
+            <h2>Smart Farming <span>Starts Here</span></h2>
+
+            <div class="line"></div>
+
+            <p>
+                “Empowering farmers with intelligent crop decisions.”
+            </p>
+
+            <span>
+                Grow smarter with AI-powered agricultural insights and maximize productivity with data-driven recommendations.
+            </span>
+        </div>
+    </div>
+
+</div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-panel">
+
+        <div class="tag">AI POWERED AGRICULTURE</div>
+
+        <h1>Crop <span>Prediction</span></h1>
+
+        <p class="desc">
+            Enter soil and environmental values to discover the best crop.
+        </p>
+
+        <form action="{{url_for('predict')}}" method="POST">
+
+    <div class="row">
+        <input type="number" name="N" placeholder="Nitrogen (N)" required>
+        <input type="number" name="P" placeholder="Phosphorous (P)" required>
+    </div>
+
+    <div class="row">
+        <input type="number" name="K" placeholder="Potassium (K)" required>
+        <input type="number" step="any" name="temperature" placeholder="Temperature" required>
+    </div>
+
+    <div class="row">
+        <input type="number" step="any" name="humidity" placeholder="Humidity" required>
+        <input type="number" step="any" name="ph" placeholder="pH Value" required>
+    </div>
+
+    <input class="full" type="number" step="any" name="rainfall" placeholder="Rainfall" required>
+
+    <button type="submit">Predict Best Crop →</button>
+
+</form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
